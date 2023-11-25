@@ -16,20 +16,38 @@
             $region_ids_arr = get_post_meta( $tourist_attraction->ID, 'regions', true);
 
             foreach($region_ids_arr as $region_id) {
-                $regions[]['id'] = $region_id;
-                $regions[]['name'] = get_the_title($region_id);
+                $regions[] = (object) array(
+                    'id' => (int)$region_id,
+                    'name'=> get_the_title($region_id)
+                );
             }
 
             $district_ids_arr = get_post_meta( $tourist_attraction->ID, 'districts', true);
 
             foreach($district_ids_arr as $district_id) {
-                $districts[]['id'] = $district_id;
-                $districts[]['name'] = get_the_title($district_id);
+                $districts[] = (object) array(
+                    'id' => (int) $district_id,
+                    'name' => get_the_title($district_id)
+                );
             }
 
             $county_ids_arr = get_post_meta( $tourist_attraction->ID, 'counties', true);
 
+            foreach($county_ids_arr as $county_id) {
+                $counties[] = (object) array(
+                    'id' => (int) $county_id,
+                    'name' => get_the_title($county_id)
+                );
+            }
+
             $sub_county_ids_arr = get_post_meta( $tourist_attraction->ID, 'sub-counties', true);
+
+            foreach($sub_county_ids_arr as $sub_county_id) {
+                $sub_counties[] = (object) array(
+                    'id' => (int) $sub_county_id,
+                    'name' => get_the_title($sub_county_id)
+                );
+            }
 
             $parish_ids_arr = get_post_meta( $parish->ID, 'parishes', true);
 
@@ -48,8 +66,10 @@
             $the_tourist_attractions[] = array(
                 'id' => $tourist_attraction->ID,
                 'name' => $tourist_attraction->post_title,
-                'regions' => (object) $regions,
-                'districts' => (object) $districts,
+                'regions' => $regions,
+                'districts' => $districts,
+                'counties' => $counties,
+                'subcounties' => $sub_counties,
             );
         }
 
