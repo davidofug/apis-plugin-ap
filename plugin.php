@@ -10,6 +10,8 @@
     // Get the path to the plugin directory
     $plugin_dir = plugin_dir_path( __FILE__ );
 
+    define( 'UG_API_PLUGIN_DIR', $plugin_dir );
+
     // Modify REST API URL prefix
     function my_rest_url_prefix( $slug ) {
         return 'ug/api'; // Change 'api' to your desired prefix
@@ -35,7 +37,7 @@
     }
     register_deactivation_hook( __FILE__, 'plugin_deactivation' );
 
-    require_once $plugin_dir . "/endpoints/regions.php";
+    require_once UG_API_PLUGIN_DIR . "/endpoints/regions/include.php";
     require_once $plugin_dir . "/endpoints/districts.php";
     require_once $plugin_dir . "/endpoints/villages.php";
     require_once $plugin_dir . "/endpoints/languages.php";
